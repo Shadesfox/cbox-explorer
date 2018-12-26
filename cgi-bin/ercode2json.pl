@@ -2,7 +2,6 @@
 
 use strict;
 use Storable qw(nfreeze thaw);
-use File::Slurper 'read_text';
 use JSON 'encode_json';
 
 my ($buffer, @pairs, $pair, $name, $value, %FORM, $er_code);
@@ -26,7 +25,6 @@ foreach $pair (@pairs) {
 }
 
 $er_code = $FORM{'cbox'};
-#my $import = read_text('/var/www/cbox-perl/cgi-bin/cbox.txt');
 $er_code =~ s/(\s|\n|$)//gs;
 my %char = %{thaw(pack('H*', $er_code))};
 my $json_box;
