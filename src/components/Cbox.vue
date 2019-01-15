@@ -16,8 +16,7 @@
         data () {
             return {
                 display_index: null,
-                display_box: [],
-                first_char: null
+                display_box: []
             }
         },
         computed: mapGetters([
@@ -30,9 +29,7 @@
         },
         watch: {
             display_index: function(new_index) {
-                console.log('Updating index')
                 this.display_box = this.characterListSlice(new_index, new_index+5)
-                this.first_char = this.display_box[0]
             }
         },
         components: {

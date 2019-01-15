@@ -7,6 +7,21 @@ function uuidv4() {
     });
 }
 
+const alphabetSort = function(a, b) {
+    let nameA = a.name.toUpperCase() // ignore upper and lowercase
+    let nameB = b.name.toUpperCase() // ignore upper and lowercase
+
+    if (nameA < nameB) {
+        return -1
+    }
+    if (nameA > nameB) {
+        return 1
+    }
+
+    // names must be equal
+    return 0
+}
+
 const erMapFunc = function(character, cname) {
     const newCharacter = {
         name : cname,
@@ -32,9 +47,9 @@ const state = {
 
 const mutations = {
     setCharacterList: (state, cbox) => {
-        console.log('In mutation')
-        state.characterList = erConverter(cbox)
-        console.log(state.characterList)
+        let newList = erConverter(cbox)
+        newList.sort(alphabetSort)
+        state.characterList = newList
     }
 }
 
@@ -54,7 +69,6 @@ const actions = {
     convertErToCbox: ({commit}, erCode) => {
         return new Promise((resolve) => {
             cbox.convertERtoCbox(erCode).then((characterList) => {
-                console.log(characterList)
                 commit('setCharacterList', characterList)
                 resolve(characterList)
             })
